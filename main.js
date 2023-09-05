@@ -30,7 +30,21 @@ clickButtons()
 function updateDisplay(value) {
     displayValue = value
     const display = document.querySelector('#display')
-    display.innerHTML = displayValue
+    resizeDisplay()
+    display.innerHTML = displayValue  
+}
+
+function resizeDisplay() {
+    const defaultSize = 50
+    const defaultLength = 7
+    const reduceBy = 0.5
+    const size = displayValue.length
+
+    const resizeBy = (reduceBy / (Math.ceil(size/ defaultLength)) * 2)
+    const newSize = (defaultSize * resizeBy) + 'px'
+    const display = document.querySelector('#display')
+    display.style.fontSize = newSize
+
 }
 
 function setNumber(value) {
