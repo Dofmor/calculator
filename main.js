@@ -40,10 +40,13 @@ function setNumber(value) {
 }
 
 function setOperator(value) {
-    if (firstNumber === '')
+    if (operator !== '') {
+        evaluate()        
+        operator = value
+        return
+    } 
+    else if (firstNumber === '') 
         firstNumber = '0'
-    if (operator !== '')
-        evaluate()
     operator = value
     firstValueSet = true
     updateDisplay(operator)
@@ -51,6 +54,8 @@ function setOperator(value) {
 
 function evaluate() {
 
+    if(secondNumber === '')
+        return
 
     console.log(`firstNumber: ${firstNumber} secondNumber: ${secondNumber} operator: ${operator}`)
     let firstNum = parseFloat(firstNumber)
