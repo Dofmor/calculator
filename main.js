@@ -40,14 +40,16 @@ function setNumber(value) {
 }
 
 function setOperator(value) {
+    if (firstNumber === '')
+        firstNumber = '0'
+    if (operator !== '')
+        evaluate()
     operator = value
     firstValueSet = true
-    if(firstNumber === '')
-        firstNumber = '0'
     updateDisplay(operator)
 }
 
-function evaluate () {
+function evaluate() {
 
 
     console.log(`firstNumber: ${firstNumber} secondNumber: ${secondNumber} operator: ${operator}`)
