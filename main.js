@@ -109,6 +109,7 @@ function evaluate() {
             return
     }
     console.log(`answer: ${answer}`)
+    answer += ''
     updateDisplay(answer)
 
     firstNumber = answer
