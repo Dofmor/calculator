@@ -34,15 +34,25 @@ function updateDisplay(value) {
 }
 
 function setNumber(value) {
+
     if (!firstValueSet) {
+        if(checkPeriod(value,firstNumber)) return
         firstNumber += value
         updateDisplay(firstNumber)
     }
     else {
+        if((checkPeriod(value,secondNumber))) return
         secondNumber += value
         updateDisplay(secondNumber)
     }
     console.log(`firstNumber: ${firstNumber} secondNumber: ${secondNumber} operator: ${operator}`)
+}
+
+function checkPeriod(value, number) {
+    const isPeriod = value === '.'
+    const hasPeriod = number.includes('.')
+
+    return (isPeriod && hasPeriod) ? true : false
 }
 
 function setOperator(value) {
@@ -60,8 +70,7 @@ function setOperator(value) {
 
 function evaluate() {
 
-    if (secondNumber === '')
-        return
+    if (secondNumber === '') return
 
     console.log(`firstNumber: ${firstNumber} secondNumber: ${secondNumber} operator: ${operator}`)
     let firstNum = parseFloat(firstNumber)
@@ -127,7 +136,5 @@ function percentage() {
         secondNumber = '' + percentagedVal
         updateDisplay(secondNumber)
     }
-
-
         
 }
