@@ -47,7 +47,7 @@ button {
     background-color: #ec9706;
 }
 
-.operation-button:focus {
+.operation-button:focus:not(#equals) {
     background-color: #a56a04;
 }
 
