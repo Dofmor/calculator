@@ -42,10 +42,14 @@ function setNumber(value) {
 function setOperator(value) {
     operator = value
     firstValueSet = true
+    if(firstNumber === '')
+        firstNumber = '0'
     updateDisplay(operator)
 }
 
 function evaluate () {
+
+
     console.log(`firstNumber: ${firstNumber} secondNumber: ${secondNumber} operator: ${operator}`)
     let firstNum = parseFloat(firstNumber)
     let secondNum = parseFloat(secondNumber)
@@ -66,11 +70,14 @@ function evaluate () {
             answer = firstNum + secondNum
             break
         default:
-            answer = 'error'
-            break
+            return
     }
     console.log(`answer: ${answer}`)
     updateDisplay(answer)
+
+    firstNumber = answer
+    secondNumber = ''
+    operator = ''
 }
 
 function clear() {
