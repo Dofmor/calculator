@@ -1,72 +1,80 @@
-let prevNumber = newNumber = null
-let prevOperator = newOperator = null
-let currNumber = currOperator = null
-let displayNumber = '0'
+let firstNumber = secondNumber = ''
+let operator = ''
+let answer = ''
+let firstValueSet = false
+let displayValue = '0'
 
-const buttons = document.querySelectorAll('button')
 
-function clickButton() {
-    buttons.forEach (button => button.addEventListener('click', function() {
-        if (button.id === 'clear')
-            clear()
-        else if (button.classList.contains('number-button'))
-            setNumber()
+function clickButtons() {
+    const buttons = document.querySelectorAll('button')
+    buttons.inn
+    buttons.forEach(button => button.addEventListener('click', function () {
+        if (button.classList.contains('number-button'))
+            setNumber(button.innerHTML)
+        else if (button.id === 'equals')
+            evaluate()
         else if (button.classList.contains('operation-button'))
-            setOperator()
-        else if (button.id === 'invert')
-            invertNumber()
-        else if (button.id === 'reduce')
-            reduceNumber()
-        else
-            alert(button.innerHTML)
-    })) 
+            setOperator(button.innerHTML)
+        else if (button.id === 'clear')
+            clear()
+    }))
 }
 
-clickButton()
+clickButtons()
 
-function updateDisplay() {
+function updateDisplay(value) {
+    displayValue = value
     const display = document.querySelector('#display')
-    display.innerHTML = displayNumber
+    display.innerHTML = displayValue
 }
 
-function clear() {
-    displayNumber = '0'
-    updateDisplay()
-}
-
-
-function setNumber() {
-    console.log('setNumber()')
-    console.log(`prevNumber = ${prevNumber}`)
-    console.log(`newNumber = ${newNumber}`)
-}
-
-function setOperator() {
-    console.log('setOperator()')
-}
-
-function invertNumber() {
-    console.log('invertNumber()')
-}
-
-function reduceNumber() {
-    console.log('reduceNumber()')
-}
-
-function operate (num1, num2, operator) {
-    switch(operator) {
-        case '/':
-            return (num2 === 0) ? "Invalid" : num1 / num2
-        case 'x':
-            return num1 * num2
-        case '+':
-            return num1 + num2
-        case '-':
-            return num1 - num2
+function setNumber(value) {
+    if (!firstValueSet) {
+        firstNumber += value
+        updateDisplay(firstNumber)
+    }
+    else {
+        secondNumber += value
+        updateDisplay(secondNumber)
     }
 }
 
-function roundAccurately(num, places) {
-    return parseFloat(Math.round(num + 'e' + places) + 'e-' + places);
+function setOperator(value) {
+    operator = value
+    firstValueSet = true
+    updateDisplay(operator)
 }
 
+function evaluate () {
+    console.log(`firstNumber: ${firstNumber} secondNumber: ${secondNumber} operator: ${operator}`)
+    let firstNum = parseFloat(firstNumber)
+    let secondNum = parseFloat(secondNumber)
+
+    console.log(`firstNum: ${firstNum} secondNum: ${secondNum} operator: ${operator}`)
+
+    switch (operator) {
+        case '/':
+            answer = firstNum / secondNum
+            break
+        case 'x':
+            answer = firstNum * secondNum
+            break
+        case '-':
+            answer = firstNum - secondNum
+            break
+        case '+':
+            answer = firstNum + secondNum
+            break
+        default:
+            answer = 'error'
+            break
+    }
+    console.log(`answer: ${answer}`)
+    updateDisplay(answer)
+}
+
+function clear() {
+    firstNumber = secondNumber = ''
+    firstValueSet = false
+    updateDisplay('0')
+}
