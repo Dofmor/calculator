@@ -147,7 +147,7 @@ function percentage() {
         updateDisplay(firstNumber)
     }
     else if (secondNumber !== '' && secondNumber !== '0'){
-        percentagedVal = parseFloat(SecurityPolicyViolationEvent)/100
+        percentagedVal = parseFloat(secondNumber)/100
         secondNumber = '' + percentagedVal
         updateDisplay(secondNumber)
     }
